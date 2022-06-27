@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "ES2015",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "outDir": "./dist",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "types": ["miniprogram-api-typings"],
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitThis": true,
+    "skipLibCheck": false,
+    "moduleResolution": "Node",
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["example", "node_modules"]
+}
