@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yingguanghui/wxapp-enhance.git"
+    "url": "git+https://github.com/ygh991204/wxapp-pro.git"
   },
   "author": "Xiao Feng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yingguanghui/wxapp-enhance/issues"
+    "url": "https://github.com/ygh991204/wxapp-pro/issues"
   },
-  "homepage": "https://github.com/yingguanghui/wxapp-enhance#readme",
+  "homepage": "https://github.com/ygh991204/wxapp-pro#readme",
   "dependencies": {
     "lodash-es": "^4.17.21"
   },
