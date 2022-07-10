@@ -1,73 +1,72 @@
-import type { Action } from './createAction'
 import type { ITypeIObject, IAnyObject } from '../type'
+import type { RootState } from './type'
+import { isFunc } from '../utils/validate'
 
+export type Module = ReturnType<typeof createModule>
 
-import { createAction } from './createAction'
-import cloneDeep from 'lodash-es/cloneDeep'
-
-export type ModuleCaseReducers<State extends IAnyObject = IAnyObject> = ITypeIObject<
-  (state: State, action: Action) => State
+export type ModuleMutations<State extends IAnyObject = IAnyObject> = ITypeIObject<(state: State, payload: any) => State>
+export type ModuleActions<State extends IAnyObject = IAnyObject> = ITypeIObject<
+  (
+    context: {
+      state: State
+      rootState: RootState
+      commit: (type: string, payload: any) => void
+      dispatch: (type: string, payload: any) => void | Promise<any>
+    },
+    payload: any
+  ) => void | Promise<any>
 >
 
-export type ModuleReducer = ReturnType<typeof createModule>['reducer']
-
 /**
- *  创建 module
+ * 创建模块
  */
 export function createModule<
   State extends IAnyObject = IAnyObject,
-  CR extends ModuleCaseReducers<State> = ModuleCaseReducers<State>,
-  Name extends String = string
->(option: {
-  /** 模块名称 */  
-  name: Name
-  /** 初始值 */
-  initialState: State | (() => State)
-  /** reducer, 同步 */
-  reducers?: CR
-  /** reducer，异步 */
-  extraReducers?: ModuleCaseReducers<State>
-}) {
+  Mutations extends ModuleMutations<State> = ModuleMutations<State>,
+  Actions extends ModuleActions<State> = ModuleActions<State>,
+  Name extends string = string
+>(options: { state: State | (() => State); mutations?: Mutations; actions?: Actions; name: Name }) {
 
-  let initialState = option.initialState as State
+  const name = options.name
 
-  if (typeof initialState === 'function') {
-    initialState = initialState()
+  const state = isFunc(options.state) ? options.state() : options.state
+
+  const { mutations, mutationsType } = Object.keys(options.mutations || {}).reduce(
+    (prev, key) => {
+      prev.mutations[name + '/' + key] = options.mutations[key]
+      prev.mutationsType[key] = name + '/' + key
+      return prev
+    },
+    {
+      mutations: {},
+      mutationsType: {},
+    }
+  ) as {
+    mutations: Mutations
+    mutationsType: Record<keyof Mutations, string>
   }
 
-  const name = option.name
-  const reducers = option.reducers || ({} as CR)
-  const reslut = Object.keys(reducers)
-    .sort()
-    .reduce(
-      (_, key) => {
-        const type = name + '/' + key
-        _.caseReducers[type] = reducers[key]
-        _.actions[key] = (paylod: any) => createAction(type, paylod)
-        return _
-      },
-      {
-        actions: {},
-        caseReducers: {},
-      }
-    )
-  const actions = reslut.actions as {
-    [K in keyof CR]: (payload?: any) => Action
+  const { actions, actionsType } = Object.keys(options.actions || {}).reduce(
+    (prev, key) => {
+      prev.actions[name + '/' + key] = options.actions[key]
+      prev.actionsType[key] = name + '/' + key
+      return prev
+    },
+    {
+      actions: {},
+      actionsType: {},
+    }
+  ) as {
+    actions: Actions
+    actionsType: Record<keyof Actions, string>
   }
-  const caseReducers = reslut.caseReducers as CR
-
-  const extraReducers = option.extraReducers || ({} as ModuleCaseReducers<State>)
 
   return {
-    actions,
     name,
-    reducer: {
-      caseReducers,
-      name,
-      getInitialState() {
-        return cloneDeep(initialState)
-      },
-      extraReducers
-    }
+    state,
+    actions,
+    actionsType,
+    mutations,
+    mutationsType,
   }
 }

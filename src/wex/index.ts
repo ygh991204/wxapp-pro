@@ -1,9 +1,7 @@
-import { craeteAsyncAction } from './craeteAsyncAction'
 import { createModule } from './createModule'
-import { creatStore } from './creatStore'
+import { createStore } from './createStore'
 
 export const Wex = {
-  creatStore,
-  craeteAsyncAction,
-  createModule
+  createModule,
+  createStore,
 }

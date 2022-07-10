@@ -14,7 +14,7 @@ const projectRootDir = path.resolve(__dirname)
 export default defineConfig({
   input: 'src/index.ts',
   output: {
-    file: isProd ? 'dist/index.min.js' : 'example/dist/index.js',
+    file: isProd ? 'dist/index.js' : 'example/dist/index.js',
     format: 'umd',
     name: 'WxappEnhance'
   },
