@@ -1,5 +1,5 @@
 /// <reference types="miniprogram-api-typings" />
-import type { ITypeIObject, IAnyObject } from '../type';
+import type { ITypeObject, IAnyObject } from '../type';
 import type { ModuleReducer } from './createModule';
 import type { Action } from './createAction';
 import type { AsyncAction } from './craeteAsyncAction';
@@ -7,7 +7,7 @@ import type { StoreOption } from './constant';
 export declare type RootState = IAnyObject;
 export declare type ComponentSelectors<State extends RootState = RootState, Name extends keyof State = keyof State> = Array<[
     Name,
-    Array<keyof State[Name]> | ITypeIObject<keyof State[Name] | ((rootState: State[Name]) => any)>
+    Array<keyof State[Name]> | ITypeObject<keyof State[Name] | ((rootState: State[Name]) => any)>
 ]>;
 export declare type ComponentSelf = WechatMiniprogram.Behavior.Instance<WechatMiniprogram.Behavior.DataOption, WechatMiniprogram.Behavior.PropertyOption, WechatMiniprogram.Behavior.MethodOption>;
 export declare type Component = {

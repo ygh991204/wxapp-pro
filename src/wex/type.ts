@@ -1,4 +1,4 @@
-import type { ITypeIObject, IAnyObject } from '../type'
+import type { ITypeObject, IAnyObject } from '../type'
 
 export type RootState = IAnyObject
 
@@ -11,7 +11,7 @@ export type StoreOption = {
 }
 
 export type ComponentSelectors<State extends RootState = RootState, Name extends keyof State = keyof State> = Array<
-  [Name, Array<keyof State[Name]> | ITypeIObject<keyof State[Name] | ((state: State[Name]) => any)>]
+  [Name, Array<keyof State[Name]> | ITypeObject<keyof State[Name] | ((state: State[Name]) => any)>]
 >
 
 export type ComponentSelf = WechatMiniprogram.Behavior.Instance<

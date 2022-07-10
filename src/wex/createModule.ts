@@ -1,11 +1,11 @@
-import type { ITypeIObject, IAnyObject } from '../type'
+import type { ITypeObject, IAnyObject } from '../type'
 import type { RootState } from './type'
 import { isFunc } from '../utils/validate'
 
 export type Module = ReturnType<typeof createModule>
 
-export type ModuleMutations<State extends IAnyObject = IAnyObject> = ITypeIObject<(state: State, payload: any) => State>
-export type ModuleActions<State extends IAnyObject = IAnyObject> = ITypeIObject<
+export type ModuleMutations<State extends IAnyObject = IAnyObject> = ITypeObject<(state: State, payload: any) => State>
+export type ModuleActions<State extends IAnyObject = IAnyObject> = ITypeObject<
   (
     context: {
       state: State

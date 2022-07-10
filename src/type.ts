@@ -1,3 +1,3 @@
-export type ITypeIObject<T> = Record<any, T>
-export type IAnyObject = ITypeIObject<any>
-export type IFuncObject = ITypeIObject<(val: any) => void>
+export type ITypeObject<T> = Record<any, T>
+export type IAnyObject = ITypeObject<any>
+export type IFuncObject = ITypeObject<(val: any) => void>

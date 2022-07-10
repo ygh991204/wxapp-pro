@@ -1,6 +1,6 @@
 import type { Action } from './createAction';
-import type { ITypeIObject, IAnyObject } from '../type';
-export declare type ModuleCaseReducers<State extends IAnyObject = IAnyObject> = ITypeIObject<(state: State, action: Action) => State>;
+import type { ITypeObject, IAnyObject } from '../type';
+export declare type ModuleCaseReducers<State extends IAnyObject = IAnyObject> = ITypeObject<(state: State, action: Action) => State>;
 export declare type ModuleReducer = ReturnType<typeof createModule>['reducer'];
 export declare function createModule<State extends IAnyObject = IAnyObject, CR extends ModuleCaseReducers<State> = ModuleCaseReducers<State>, Name extends String = string>(option: {
     name: Name;

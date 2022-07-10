@@ -1,4 +1,4 @@
-import type { FetchConfig, RequestOption, ResponseFulfilled, RequestFulfilled, Rejected } from './type'
+import type { FetchConfig, RequestOption, ResponseFulfilled, RequestFulfilled, Rejected, FetchOption } from './type'
 
 import cloneDeep from 'lodash-es/cloneDeep'
 import merge from 'lodash-es/merge'
@@ -43,7 +43,7 @@ export function createFetch(_config?: FetchConfig) {
   /** 发起请求 */
   async function fetch<T = any, R = WechatMiniprogram.RequestSuccessCallbackResult<T>>(
     url: string,
-    option?: Omit<RequestOption, 'url'>
+    option?: FetchOption
   ) {
     try {
       let _option = merge(cloneDeep(config), { url, ...(option || {}) })

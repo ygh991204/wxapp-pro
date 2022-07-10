@@ -21,6 +21,8 @@ export type RequestOption = WxRequestOption & {
   taskId?: string
 }
 
+export type FetchOption = Omit<RequestOption, 'url'>
+
 export type RequestFulfilled = (value: RequestOption) => RequestOption | Promise<RequestOption>
 
 export type ResponseFulfilled = (
