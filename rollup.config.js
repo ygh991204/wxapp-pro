@@ -16,7 +16,7 @@ export default defineConfig({
   output: {
     file: isProd ? 'dist/index.js' : 'example/dist/index.js',
     format: 'umd',
-    name: 'WxappEnhance'
+    name: 'wxapp-pro'
   },
   plugins: [
     alias({

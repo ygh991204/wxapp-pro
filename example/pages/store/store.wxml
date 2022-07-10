@@ -1,7 +1,1 @@
 <!--pages/store/store.wxml-->
-
-<view>
-  {{ countCount }}
-</view>
-
-<button bindtap="countCountAdd">增加</button>
