@@ -23,6 +23,9 @@ export function createStore<State extends RootState = RootState>(modules: Module
     return type.split('/')
   }
 
+  /**
+   * 提交 mutation
+   */
   function commit(type: string, payload: any, lazy = true) {
     const [moduleName] = parseType(type)
     const prevState = rootState[moduleName]
@@ -35,15 +38,18 @@ export function createStore<State extends RootState = RootState>(modules: Module
         setDataComponent(self, _selectors)
       }
     }
+    return nextSate
   }
 
   function getState() {
     return rootState as State
   }
 
+  /**
+   * 提交 action
+   */
   function dispatch(type: string, paylod: any, lazy = true) {
     const [moduleName] = parseType(type)
-    const prevState = rootState[moduleName]
     function moduleCommit(type: string, payload: any) {
       return commit(moduleName + '/' + type, payload, lazy)
     }
@@ -52,7 +58,7 @@ export function createStore<State extends RootState = RootState>(modules: Module
     }
     return rootActions[type](
       {
-        state: prevState,
+        state: rootState[moduleName],
         rootState: getState(),
         commit: moduleCommit,
         dispatch: moduleDispatch,
@@ -61,6 +67,9 @@ export function createStore<State extends RootState = RootState>(modules: Module
     )
   }
 
+  /**
+   * 更新组件数据
+   */
   function setDataComponent(self: ComponentSelf, selectors: ComponentSelectors) {
     const data = {}
     for (let i = 0; i < selectors.length; i++) {

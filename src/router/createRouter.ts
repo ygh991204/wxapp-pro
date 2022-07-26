@@ -7,7 +7,7 @@ import type {
   AfterEachFulfilled,
   BeforeEachFulfilled,
   Rejected,
-  NavigateToSuccessResult,
+  NavigateToSuccessResult
 } from './type'
 
 import cloneDeep from 'lodash-es/cloneDeep'
@@ -18,15 +18,15 @@ import { NavigateType, RouterType } from './type'
 export function createRouter() {
   let lock = false
 
-  let beforeEachFulfilled: BeforeEachFulfilled = function (to) {
+  let beforeEachFulfilled: BeforeEachFulfilled = function(to) {
     return to
   }
 
-  let afterEachFulfilled: AfterEachFulfilled = function (reslut, to) {
+  let afterEachFulfilled: AfterEachFulfilled = function(reslut) {
     return reslut
   }
 
-  let rejected: Rejected = function (err, to) {
+  let rejected: Rejected = function(err) {
     return err
   }
 
@@ -44,12 +44,12 @@ export function createRouter() {
         case NavigateType.NavigateTo:
           reslut = await wx.navigateTo({
             url,
-            events: _option.on || {},
+            events: _option.on || {}
           })
           break
         default:
           reslut = await wx[_option.navigateType]({
-            url,
+            url
           })
           break
       }
@@ -83,13 +83,13 @@ export function createRouter() {
   }
 
   /**
-   * 
+   *
    */
   async function push(option: PushOption) {
     return await navigate({
       ...option,
       navigateType: NavigateType.NavigateTo,
-      routerType: RouterType.Push,
+      routerType: RouterType.Push
     })
   }
 
@@ -97,7 +97,7 @@ export function createRouter() {
     return await navigate({
       ...option,
       navigateType: NavigateType.ReLaunch,
-      routerType: RouterType.ReLaunch,
+      routerType: RouterType.ReLaunch
     })
   }
 
@@ -108,7 +108,7 @@ export function createRouter() {
     return await navigate({
       ...option,
       navigateType: NavigateType.RedirectTo,
-      routerType: RouterType.Redirect,
+      routerType: RouterType.Redirect
     })
   }
 
@@ -119,7 +119,7 @@ export function createRouter() {
     return await navigate({
       ...option,
       navigateType: NavigateType.SwitchTab,
-      routerType: RouterType.Switch,
+      routerType: RouterType.Switch
     })
   }
 
@@ -133,7 +133,7 @@ export function createRouter() {
     lock = true
     try {
       const reslut = await wx.navigateBack({
-        delta,
+        delta
       })
       lock = false
       return reslut
@@ -151,6 +151,6 @@ export function createRouter() {
     push,
     switchTab,
     reLaunch,
-    redirect,
+    redirect
   }
 }

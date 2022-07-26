@@ -4,7 +4,7 @@ export function getNavRect() {
     top: 8,
     width: 96,
     height: 32,
-    right: 8,
+    right: 8
   }
 
   try {
@@ -35,6 +35,6 @@ export function getNavRect() {
     height,
     capsuleBar,
     statusBarHeight,
-    navBarHeight,
+    navBarHeight
   }
 }

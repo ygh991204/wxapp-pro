@@ -6,15 +6,15 @@ export type Module = ReturnType<typeof createModule>
 
 export type ModuleMutations<State extends IAnyObject = IAnyObject> = ITypeObject<(state: State, payload: any) => State>
 export type ModuleActions<State extends IAnyObject = IAnyObject> = ITypeObject<
-  (
-    context: {
-      state: State
-      rootState: RootState
-      commit: (type: string, payload: any) => void
-      dispatch: (type: string, payload: any) => void | Promise<any>
-    },
-    payload: any
-  ) => void | Promise<any>
+(
+  context: {
+    state: State
+    rootState: RootState
+    commit: (type: string, payload: any) => void
+    dispatch: (type: string, payload: any) => void | Promise<any>
+  },
+  payload: any
+) => void | Promise<any>
 >
 
 /**
@@ -26,9 +26,9 @@ export function createModule<
   Actions extends ModuleActions<State> = ModuleActions<State>,
   Name extends string = string
 >(options: { state: State | (() => State); mutations?: Mutations; actions?: Actions; name: Name }) {
-
   const name = options.name
 
+  /** 初始状态 */
   const state = isFunc(options.state) ? options.state() : options.state
 
   const { mutations, mutationsType } = Object.keys(options.mutations || {}).reduce(
@@ -39,7 +39,7 @@ export function createModule<
     },
     {
       mutations: {},
-      mutationsType: {},
+      mutationsType: {}
     }
   ) as {
     mutations: Mutations
@@ -54,7 +54,7 @@ export function createModule<
     },
     {
       actions: {},
-      actionsType: {},
+      actionsType: {}
     }
   ) as {
     actions: Actions
@@ -67,6 +67,6 @@ export function createModule<
     actions,
     actionsType,
     mutations,
-    mutationsType,
+    mutationsType
   }
 }

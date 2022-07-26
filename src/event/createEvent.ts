@@ -31,7 +31,7 @@ export function createEvent(events: string[]) {
       handler,
       triggerCount: 0,
       self,
-      limitCount,
+      limitCount
     })
   }
 
@@ -80,6 +80,6 @@ export function createEvent(events: string[]) {
     $emit,
     $off,
     $once,
-    getListens,
+    getListens
   }
 }

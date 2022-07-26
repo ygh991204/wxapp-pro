@@ -80,6 +80,8 @@ export function createFetch(_config?: FetchConfig) {
   /** */
   fetch.task = task
 
+  fetch.create = createFetch
+
   /** 微信请求 */
   function wxRequest(option: RequestOption) {
     const taskOption = cloneDeep(option)

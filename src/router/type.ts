@@ -6,7 +6,7 @@ export enum NavigateType {
   NavigateTo = 'navigateTo',
   RedirectTo = 'redirectTo',
   ReLaunch = 'reLaunch',
-  SwitchTab = 'switchTab',
+  SwitchTab = 'switchTab'
 }
 
 /** Router 类型 */
@@ -14,11 +14,11 @@ export enum RouterType {
   Push = 'push',
   ReLaunch = 'reLaunch',
   Redirect = 'redirect',
-  Switch = 'switch',
+  Switch = 'switch'
 }
 
 export type NavigateOption = {
-  /** 页面路径 */  
+  /** 页面路径 */
   path: string
   /** 页面参数 */
   query?: IAnyObject

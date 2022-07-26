@@ -2,22 +2,19 @@ import type { ITypeObject, IAnyObject } from '../type'
 
 export type RootState = IAnyObject
 
-export type DispatchOption = {
-  lazy?: boolean
-}
-
 export type StoreOption = {
   debug?: boolean
 }
 
 export type ComponentSelectors<State extends RootState = RootState, Name extends keyof State = keyof State> = Array<
-  [Name, Array<keyof State[Name]> | ITypeObject<keyof State[Name] | ((state: State[Name]) => any)>]
+[Name, Array<keyof State[Name]> | ITypeObject<keyof State[Name] | ((state: State[Name]) => any)>]
 >
 
+/** 组件实例 */
 export type ComponentSelf = WechatMiniprogram.Behavior.Instance<
-  WechatMiniprogram.Behavior.DataOption,
-  WechatMiniprogram.Behavior.PropertyOption,
-  WechatMiniprogram.Behavior.MethodOption
+WechatMiniprogram.Behavior.DataOption,
+WechatMiniprogram.Behavior.PropertyOption,
+WechatMiniprogram.Behavior.MethodOption
 >
 
 export type Component = {

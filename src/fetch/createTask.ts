@@ -52,7 +52,7 @@ export function createTask() {
     list.push({
       id,
       task,
-      option,
+      option
     })
   }
 

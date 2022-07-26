@@ -3,5 +3,5 @@ import { createStore } from './createStore'
 
 export const Wex = {
   createModule,
-  createStore,
+  createStore
 }
